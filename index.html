@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" inisial-scale="1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather API</title>
+  </head>
+
+  <body>
+    <section id="heading">
+      <h1>Weather API</h1>
+      <section id="section-search">
+        <input id="search-input" type="text" placeholder="Enter city name..." maxlength="15" required/>
+        <button id="search-btn">Search</button>
+      </section>
+      <section id="section-result">
+        <h2 id="result-city-name"></h2>
+        <div id="result-temperature"></div>
+        <div id="result-humidity"></div>
+        <div id="result-wind-speed"></div>
+        <div id="result-sunrise"></div>
+        <div id="result-sunset"></div>
+      </section>
+    </section>
+
+    <div id="google-map""></div>
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
