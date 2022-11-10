@@ -58,6 +58,7 @@
 }
 
 #heading #section-result {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,6 +72,16 @@
   color: black;
   border: 1px dashed whitesmoke;
   border-radius: 5px;
+}
+
+#heading #section-result #result-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
 }
 
 div#google-map {

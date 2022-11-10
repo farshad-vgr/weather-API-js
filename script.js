@@ -1,5 +1,6 @@
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
+const resultIcon = document.getElementById("result-icon");
 const resultCityName = document.getElementById("result-city-name");
 const resultTemperature = document.getElementById("result-temperature");
 const resultHumidity = document.getElementById("result-humidity");
@@ -20,7 +21,17 @@ searchBtn.addEventListener("click", () => {
   xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value.trim()}&appid=${API_KEY}&units=metric`);
 
   xhr.onload = function () {
-    resultCityName.innerText = `City: ${JSON.parse(xhr.responseText).name}`;
+    resultIcon.style.opacity = "1";
+    
+    if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+      resultIcon.setAttribute("src", `icons/Clear-Day.svg`);
+    } else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+      resultIcon.setAttribute("src", `icons/Clear-Night.svg`);
+    } else {
+      resultIcon.setAttribute("src", `icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+    }
+
+    resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
 
     resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(JSON.parse(xhr.responseText).main.temp)} &#8451`;
 
@@ -70,7 +81,17 @@ window.onload = function () {
     xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?lat=${e.latLng.lat()}&lon=${e.latLng.lng()}&appid=${API_KEY}&units=metric`);
 
     xhr.onload = function () {
-      resultCityName.innerText = `City: ${JSON.parse(xhr.responseText).name}`;
+      resultIcon.style.opacity = "1";
+
+      if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+        resultIcon.setAttribute("src", `icons/Clear-Day.svg`);
+      } else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+        resultIcon.setAttribute("src", `icons/Clear-Night.svg`);
+      } else {
+        resultIcon.setAttribute("src", `icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+      }
+
+      resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
 
       resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(
         JSON.parse(xhr.responseText).main.temp,
