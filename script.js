@@ -7,7 +7,7 @@ const resultHumidity = document.getElementById("result-humidity");
 const resultWindSpeed = document.getElementById("result-wind-speed");
 const resultSunrise = document.getElementById("result-sunrise");
 const resultSunset = document.getElementById("result-sunset");
-const API_KEY = "51a76e1c056bf58efd0266169939564e";
+const API_KEY = "";
 
 searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
