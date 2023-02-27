@@ -24,11 +24,11 @@ searchBtn.addEventListener("click", () => {
     resultIcon.style.opacity = "1";
     
     if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-      resultIcon.setAttribute("src", `icons/Clear-Day.svg`);
+      resultIcon.setAttribute("src", `../assets/images/icons/Clear-Day.svg`);
     } else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-      resultIcon.setAttribute("src", `icons/Clear-Night.svg`);
+      resultIcon.setAttribute("src", `../assets/images/icons/Clear-Night.svg`);
     } else {
-      resultIcon.setAttribute("src", `icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+      resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
     }
 
     resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
@@ -84,11 +84,11 @@ window.onload = function () {
       resultIcon.style.opacity = "1";
 
       if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-        resultIcon.setAttribute("src", `icons/Clear-Day.svg`);
+        resultIcon.setAttribute("src", `../assets/images/icons/Clear-Day.svg`);
       } else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-        resultIcon.setAttribute("src", `icons/Clear-Night.svg`);
+        resultIcon.setAttribute("src", `../assets/images/icons/Clear-Night.svg`);
       } else {
-        resultIcon.setAttribute("src", `icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+        resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
       }
 
       resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
