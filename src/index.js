@@ -18,23 +18,19 @@ const headerBaseClass = header.className;
 const searchBtnBaseClass = searchBtn.className;
 const resultBaseClass = result.className;
 
-themeChanger(new Date().getMonth()); // The current actual season will be the default theme
+themeChanger(new Date().getMonth()); // The current actual season(user local season) will be the default theme
 
-let storedNumber = 0; // Random theme starts with 0
-const seasonNumber = [ 1, 4, 7, 10 ]; // 4 numbers that each one is representing a season and theme color
+const seasons = [ 0, 3, 6, 9 ]; // 4 numbers that each one is representing a season(index of first month of season)
 
-// This button changes the theme with a random number(a random number without repeating previous number)
+// This button changes the theme with a random number
 theme.addEventListener("click", () => {
-	const randomNumber = Math.floor(Math.random() * seasonNumber.length); // New random number
+	const randomNumber = Math.floor(Math.random() * (seasons.length - 1)); // New random number
 
-	// The new random number will be compared with the previous number to not be a repetitive number
-	if (storedNumber !== randomNumber) {
-		storedNumber = randomNumber; // Updating the value of the previous number
+	selectedNumber = seasons.splice(randomNumber, 1); // Picking a number from the first three indexes of the array
 
-		themeChanger(seasonNumber[randomNumber]);
-	} else {
-		theme.click(); // If the new random number was the same previous, the theme button will be clicked again
-	}
+	themeChanger(selectedNumber[0]); // Using the selected number to change the theme
+
+	seasons.push(selectedNumber[0]); // Store the used number at the last index of the array(to prevent repetitive selection)
 });
 
 searchInput.addEventListener("keydown", (e) => {
@@ -53,10 +49,10 @@ searchBtn.addEventListener("click", () => {
 
 		if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
 			resultIcon.setAttribute("src", `../assets/images/icons/Clear-Day.svg`);
-		} else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+		} else if ((new Date().getHours() > 18 || new Date().getHours() < 6) && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
 			resultIcon.setAttribute("src", `../assets/images/icons/Clear-Night.svg`);
 		} else {
-			resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+			resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[ 0 ].main}.svg`);
 		}
 
 		resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
@@ -71,11 +67,11 @@ searchBtn.addEventListener("click", () => {
 
 		resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(
 			JSON.parse(xhr.responseText).sys.sunrise * 1000,
-		).toString()}`;
+		).toLocaleString()}`;
 
 		resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(
 			JSON.parse(xhr.responseText).sys.sunset * 1000,
-		).toString()}`;
+		).toLocaleString()}`;
 
 		searchInput.value = "";
 	};

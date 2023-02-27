@@ -38,7 +38,7 @@
 
     <main>
       <section id="result" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col justify-center items-center text-center gap-2 p-2 w-1/2 h-60 text-xl border border-dashed rounded-lg border-slate-100 bg-opacity-70 transition duration-500">
-        <img id="result-icon"></img>
+        <img id="result-icon" class="absolute top-0 right-2 w-40 h-40 opacity-0 transition-opacity duration-1000 ease-in-out"></img>
         <h2 id="result-city-name"></h2>
         <div id="result-temperature"></div>
         <div id="result-humidity"></div>
@@ -48,7 +48,7 @@
       </section>
     </main>
 
-    <section id="google-map""></section>
+    <section id="google-map" class="hidden my-0 mx-auto p-2 w-1/2 h-1/2 cursor-default"></section>
 
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="index.js"></script>

@@ -29,33 +29,6 @@ body {
 /* 
 
 
-#header #section-result {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  width: 50%;
-  margin-bottom: 5px;
-  padding: 10px;
-  font-size: 20px;
-  color: black;
-  border: 1px dashed whitesmoke;
-  border-radius: 5px;
-}
-
-#header #section-result #result-icon {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  width: 150px;
-  height: 150px;
-  opacity: 0;
-  transition: opacity 2s ease-in-out;
-}
-
 div#google-map {
   width: 100%;
   height: 50vh;
