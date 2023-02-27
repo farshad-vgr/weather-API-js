@@ -2,66 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Acme";
+  src: url("../assets/fonts/Acme-Regular.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
   cursor: default;
 }
 
-#heading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0 auto;
-  padding: 10px;
-  background-color: deepskyblue;
-  box-shadow: 0 3px 10px 3px lightgray;
+body {
+  width: 100vw;
+  height: 100vh;
+  letter-spacing: 0.125rem;
+  font-family: "Acme", sans-serif;
+  overflow: hidden;
+  transition: background 0.5s;
 }
 
-#heading h1 {
-  margin-bottom: 10px;
-  color: whitesmoke;
-  font-size: 36px;
-}
 
-#heading #section-search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 20px;
-}
 
-#heading #section-search #search-input {
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  background-color: whitesmoke;
-  font-size: 24px;
-  cursor: pointer;
-}
+/* 
 
-#heading #section-search #search-btn {
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-left: none;
-  border-radius: 0 5px 5px 0;
-  outline: none;
-  background-color: skyblue;
-  font-size: 24px;
-}
 
-#heading #section-search #search-btn:hover {
-  filter: brightness(1.1);
-  cursor: pointer;
-}
-
-#heading #section-result {
+#header #section-result {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -78,7 +46,7 @@
   border-radius: 5px;
 }
 
-#heading #section-result #result-icon {
+#header #section-result #result-icon {
   position: absolute;
   top: 0;
   right: 10px;
@@ -94,4 +62,6 @@ div#google-map {
   margin: 0 auto;
   padding: 10px;
   cursor: default;
-}
+} 
+
+*/
