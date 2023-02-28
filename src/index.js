@@ -20,7 +20,7 @@ const resultBaseClass = result.className;
 
 themeChanger(new Date().getMonth()); // The current actual season(user local season) will be the default theme
 
-const seasons = [ 0, 3, 6, 9 ]; // 4 numbers that each one is representing a season(index of first month of season)
+const seasons = [0, 3, 6, 9]; // 4 numbers that each one is representing a season(index of first month of season)
 
 // This button changes the theme with a random number
 theme.addEventListener("click", () => {
@@ -33,6 +33,7 @@ theme.addEventListener("click", () => {
 	seasons.push(selectedNumber[0]); // Store the used number at the last index of the array(to prevent repetitive selection)
 });
 
+// This function starts searching by clicking on the "Enter" key
 searchInput.addEventListener("keydown", (e) => {
 	if (e.key === "Enter") {
 		searchBtn.click();
@@ -48,14 +49,14 @@ searchBtn.addEventListener("click", () => {
 		resultIcon.style.opacity = "1";
 
 		if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-			resultIcon.setAttribute("src", `../assets/images/icons/Clear-Day.svg`);
+			resultIcon.setAttribute("src", `./assets/images/icons/Clear-Day.svg`);
 		} else if ((new Date().getHours() > 18 || new Date().getHours() < 6) && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-			resultIcon.setAttribute("src", `../assets/images/icons/Clear-Night.svg`);
+			resultIcon.setAttribute("src", `./assets/images/icons/Clear-Night.svg`);
 		} else {
-			resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[ 0 ].main}.svg`);
+			resultIcon.setAttribute("src", `./assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
 		}
 
-		resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
+		resultCityName.innerHTML = `<span style="font-weight: bold">City: ${JSON.parse(xhr.responseText).name}</span>`;
 
 		resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(JSON.parse(xhr.responseText).main.temp)} &#8451`;
 
@@ -108,11 +109,11 @@ window.onload = function () {
 			resultIcon.style.opacity = "1";
 
 			if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-				resultIcon.setAttribute("src", `../assets/images/icons/Clear-Day.svg`);
+				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Day.svg`);
 			} else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-				resultIcon.setAttribute("src", `../assets/images/icons/Clear-Night.svg`);
+				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Night.svg`);
 			} else {
-				resultIcon.setAttribute("src", `../assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
+				resultIcon.setAttribute("src", `./assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
 			}
 
 			resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
@@ -174,28 +175,32 @@ window.onload = function () {
 // This function takes a number as the number of the month(index 0 to 11) and chooses a proper theme color
 function themeChanger(num) {
 	if (num < 3) {
-		document.body.style.backgroundImage = "url(../assets/images/background/winter.jpg)";
+		document.body.style.backgroundImage = "url(./assets/images/background/winter.jpg)";
 		theme.className = themeBaseClass + " bg-blue-600";
 		header.className = headerBaseClass + " bg-blue-400";
 		searchBtn.className = searchBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		result.className = resultBaseClass + " bg-blue-400";
 	} else if (num >= 3 && num < 6) {
-		document.body.style.backgroundImage = "url(../assets/images/background/spring.jpg)";
+		document.body.style.backgroundImage = "url(./assets/images/background/spring.jpg)";
 		theme.className = themeBaseClass + " bg-pink-600";
 		header.className = headerBaseClass + " bg-pink-400";
 		searchBtn.className = searchBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		result.className = resultBaseClass + " bg-pink-400";
 	} else if (num >= 6 && num < 9) {
-		document.body.style.backgroundImage = "url(../assets/images/background/summer.jpg)";
+		document.body.style.backgroundImage = "url(./assets/images/background/summer.jpg)";
 		theme.className = themeBaseClass + " bg-green-600";
 		header.className = headerBaseClass + " bg-green-400";
 		searchBtn.className = searchBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
 		result.className = resultBaseClass + " bg-green-400";
 	} else if (num >= 9) {
-		document.body.style.backgroundImage = "url(../assets/images/background/autumn.jpg)";
+		document.body.style.backgroundImage = "url(./assets/images/background/autumn.jpg)";
 		theme.className = themeBaseClass + " bg-orange-600";
 		header.className = headerBaseClass + " bg-orange-400";
 		searchBtn.className = searchBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		result.className = resultBaseClass + " bg-orange-400";
 	}
 }
+
+// Choose a default city name and start the search
+searchInput.value = "Tehran";
+searchBtn.click();

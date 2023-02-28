@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Acme";
-  src: url("../assets/fonts/Acme-Regular.ttf");
+  src: url("./assets/fonts/Acme-Regular.ttf");
 }
 
 * {
