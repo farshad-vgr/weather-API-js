@@ -58,7 +58,7 @@
     </main>
 
     <!-- Modal to show map -->
-    <div id="modal-backdrop" class="hidden fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 backdrop-blur-sm">
+    <div id="modal-backdrop" class="absolute bottom-full left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm transition-all duration-300 ease-in-out">
 				<div id="modal-box" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex justify-center items-center p-1 w-1/2 h-1/2 rounded-xl opacity-100 bg-slate-100 overflow-hidden">
 					<button id="modal-btn" class="absolute top-0 right-2 w-4 h-4 border-none text-red-500 bg-transparent cursor-pointer transition-transform duration-200 hover:scale-110">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 cursor-pointer">
@@ -67,7 +67,7 @@
 					</button>
 					<section class="flex flex-col justify-center items-center w-full h-full">
 						<h3 class="text-lg">Choose a location on the map</h3>
-						<div id="google-map" class="my-0 mx-auto p-2 w-full h-full rounded-br-lg rounded-bl-lg"></div>
+						<div id="google-map" class="my-0 mx-auto p-2 w-full h-full rounded-br-lg rounded-bl-lg cursor-auto"></div>
 					</section>
 				</div>
 		</div>

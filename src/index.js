@@ -45,6 +45,7 @@ searchInput.addEventListener("keydown", (e) => {
 	}
 });
 
+// Send and fetch the weather date when the search button clicked
 searchBtn.addEventListener("click", () => {
 	const xhr = new XMLHttpRequest();
 
@@ -53,31 +54,21 @@ searchBtn.addEventListener("click", () => {
 	xhr.onload = function () {
 		resultIcon.style.opacity = "1";
 
-		if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-			resultIcon.setAttribute("src", `./assets/images/icons/Clear-Day.svg`);
-		} else if ((new Date().getHours() > 18 || new Date().getHours() < 6) && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-			resultIcon.setAttribute("src", `./assets/images/icons/Clear-Night.svg`);
-		} else {
-			resultIcon.setAttribute("src", `./assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
-		}
+		const responseData = JSON.parse(xhr.responseText);
 
-		resultCityName.innerHTML = `<span style="font-weight: bold">City: ${JSON.parse(xhr.responseText).name}</span>`;
+		resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
 
-		resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(JSON.parse(xhr.responseText).main.temp)} &#8451`;
+		resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
 
-		resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(JSON.parse(xhr.responseText).main.humidity)} %`;
+		resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
-		resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(
-			JSON.parse(xhr.responseText).wind.speed,
-		)} meter/second`;
+		resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
 
-		resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(
-			JSON.parse(xhr.responseText).sys.sunrise * 1000,
-		).toLocaleString()}`;
+		resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
 
-		resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(
-			JSON.parse(xhr.responseText).sys.sunset * 1000,
-		).toLocaleString()}`;
+		resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
+
+		resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
 
 		searchInput.value = "";
 	};
@@ -86,19 +77,20 @@ searchBtn.addEventListener("click", () => {
 });
 
 mapBtn.addEventListener("click", () => {
-	modalBackdrop.classList.remove("hidden"); // Shows modal
+	modalBackdrop.classList.replace("bottom-full", "bottom-0"); // Shows modal
 });
 
 modalBackdrop.addEventListener("click", (e) => {
 	if (e.target === e.currentTarget) {
-		modalBackdrop.classList.add("hidden"); // Hide modal if click on backdrop section
+		modalBackdrop.classList.replace("bottom-0", "bottom-full"); // Hide modal if click on modal's background
 	}
 });
 
 modalBtn.addEventListener("click", () => {
-	modalBackdrop.classList.add("hidden"); // Hide modal
+	modalBackdrop.classList.replace("bottom-0", "bottom-full"); // Hide modal
 });
 
+// Loading Google map at startup and fetching weather by clicking on the map
 window.onload = function () {
 	const mapOptions = {
 		center: new google.maps.LatLng(35.71, 51.35),
@@ -127,33 +119,21 @@ window.onload = function () {
 		xhr.onload = function () {
 			resultIcon.style.opacity = "1";
 
-			if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Day.svg`);
-			} else if ((new Date().getHours() > 18 || new Date().getHours() < 6) && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
-				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Night.svg`);
-			} else {
-				resultIcon.setAttribute("src", `./assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
-			}
+			const responseData = JSON.parse(xhr.responseText);
 
-			resultCityName.innerHTML = `City: ${JSON.parse(xhr.responseText).name}`;
+			resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
 
-			resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(
-				JSON.parse(xhr.responseText).main.temp,
-			)} &#8451`;
+			resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
 
-			resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(JSON.parse(xhr.responseText).main.humidity)} %`;
+			resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
-			resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(
-				JSON.parse(xhr.responseText).wind.speed,
-			)} meter/second`;
+			resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
 
-			resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(
-				JSON.parse(xhr.responseText).sys.sunrise * 1000,
-			).toLocaleString()}`;
+			resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
 
-			resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(
-				JSON.parse(xhr.responseText).sys.sunset * 1000,
-			).toLocaleString()}`;
+			resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
+
+			resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
 
 			searchInput.value = "";
 		};
@@ -182,10 +162,10 @@ window.onload = function () {
 		circle = new google.maps.Circle({
 			center: marker.getPosition(),
 			radius: 3000,
-			strokeColor: "green",
+			strokeColor: "red",
 			strokeOpacity: 0.8,
 			strokeWeight: 2,
-			fillColor: "lightgreen",
+			fillColor: "red",
 			fillOpacity: 0.2,
 		});
 		circle.setMap(map);
