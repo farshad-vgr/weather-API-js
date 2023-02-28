@@ -2,6 +2,9 @@ const theme = document.getElementById("theme");
 const header = document.getElementById("header");
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
+const mapBtn = document.getElementById("map-btn");
+const modalBackdrop = document.getElementById("modal-backdrop");
+const modalBtn = document.getElementById("modal-btn");
 const result = document.getElementById("result");
 const resultIcon = document.getElementById("result-icon");
 const resultCityName = document.getElementById("result-city-name");
@@ -16,7 +19,9 @@ const API_KEY = "51a76e1c056bf58efd0266169939564e";
 const themeBaseClass = theme.className;
 const headerBaseClass = header.className;
 const searchBtnBaseClass = searchBtn.className;
+const mapBtnBaseClass = mapBtn.className;
 const resultBaseClass = result.className;
+const resultIconBeseClass = resultIcon.className;
 
 themeChanger(new Date().getMonth()); // The current actual season(user local season) will be the default theme
 
@@ -80,6 +85,20 @@ searchBtn.addEventListener("click", () => {
 	xhr.send();
 });
 
+mapBtn.addEventListener("click", () => {
+	modalBackdrop.classList.remove("hidden"); // Shows modal
+});
+
+modalBackdrop.addEventListener("click", (e) => {
+	if (e.target === e.currentTarget) {
+		modalBackdrop.classList.add("hidden"); // Hide modal if click on backdrop section
+	}
+});
+
+modalBtn.addEventListener("click", () => {
+	modalBackdrop.classList.add("hidden"); // Hide modal
+});
+
 window.onload = function () {
 	const mapOptions = {
 		center: new google.maps.LatLng(35.71, 51.35),
@@ -110,7 +129,7 @@ window.onload = function () {
 
 			if (new Date().getHours() >= 6 && new Date().getHours() <= 18 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
 				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Day.svg`);
-			} else if (new Date().getHours() > 18 && new Date().getHours() < 6 && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
+			} else if ((new Date().getHours() > 18 || new Date().getHours() < 6) && JSON.parse(xhr.responseText).weather[0].main === "Clear") {
 				resultIcon.setAttribute("src", `./assets/images/icons/Clear-Night.svg`);
 			} else {
 				resultIcon.setAttribute("src", `./assets/images/icons/${JSON.parse(xhr.responseText).weather[0].main}.svg`);
@@ -130,11 +149,11 @@ window.onload = function () {
 
 			resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(
 				JSON.parse(xhr.responseText).sys.sunrise * 1000,
-			).toString()}`;
+			).toLocaleString()}`;
 
 			resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(
 				JSON.parse(xhr.responseText).sys.sunset * 1000,
-			).toString()}`;
+			).toLocaleString()}`;
 
 			searchInput.value = "";
 		};
@@ -146,6 +165,7 @@ window.onload = function () {
 		markerHandler(e);
 	});
 
+	// This function handles the marker's position when clicking on the map
 	function markerHandler(e) {
 		if (typeof marker !== "undefined") {
 			marker.setMap(null);
@@ -179,25 +199,33 @@ function themeChanger(num) {
 		theme.className = themeBaseClass + " bg-blue-600";
 		header.className = headerBaseClass + " bg-blue-400";
 		searchBtn.className = searchBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
+		mapBtn.className = mapBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		result.className = resultBaseClass + " bg-blue-400";
+		resultIcon.className = resultIconBeseClass + " bg-blue-600";
 	} else if (num >= 3 && num < 6) {
 		document.body.style.backgroundImage = "url(./assets/images/background/spring.jpg)";
 		theme.className = themeBaseClass + " bg-pink-600";
 		header.className = headerBaseClass + " bg-pink-400";
 		searchBtn.className = searchBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
+		mapBtn.className = mapBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		result.className = resultBaseClass + " bg-pink-400";
+		resultIcon.className = resultIconBeseClass + " bg-pink-600";
 	} else if (num >= 6 && num < 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/summer.jpg)";
 		theme.className = themeBaseClass + " bg-green-600";
 		header.className = headerBaseClass + " bg-green-400";
 		searchBtn.className = searchBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
+		mapBtn.className = mapBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
 		result.className = resultBaseClass + " bg-green-400";
+		resultIcon.className = resultIconBeseClass + " bg-green-600";
 	} else if (num >= 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/autumn.jpg)";
 		theme.className = themeBaseClass + " bg-orange-600";
 		header.className = headerBaseClass + " bg-orange-400";
 		searchBtn.className = searchBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
+		mapBtn.className = mapBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		result.className = resultBaseClass + " bg-orange-400";
+		resultIcon.className = resultIconBeseClass + " bg-orange-600";
 	}
 }
 

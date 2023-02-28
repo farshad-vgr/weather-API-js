@@ -17,38 +17,60 @@
   </head>
 
   <body class="bg-no-repeat bg-cover bg-center">
-    <button id="theme" class="absolute top-2 right-2 p-1 rounded-full cursor-pointer hover:scale-110 hover:rotate-180 transition duration-500">
+    <button id="theme" class="absolute top-2 right-2 p-1 rounded-full cursor-pointer hover:scale-110 hover:rotate-180 transition duration-300">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 cursor-pointer">
         <path class="cursor-pointer" stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
       </svg>
     </button>
 
-    <header id="header" class="flex flex-col justify-center items-center text-center my-2 mx-auto p-2 max-w-max border-none rounded-lg bg-opacity-70 transition duration-500">
+    <header id="header" class="flex flex-col justify-center items-center text-center my-2 mx-auto p-2 max-w-max border-none rounded-lg bg-opacity-70 transition duration-300">
       <h1 class="mb-2 text-4xl first-letter:text-5xl first-letter:font-bold">Weather API</h1>
 
       <section class="flex justify-center items-center text-center mb-2">
         <input id="search-input" class="py-1 px-2 tracking-wider border-r-0 rounded-tl-lg rounded-bl-lg outline-none bg-slate-100 text-2xl cursor-text" type="text" placeholder="Enter city name..." maxlength="20" required autofocus/>
-        <button id="search-btn" class="flex justify-center items-center py-1 px-2 border-l-0 rounded-tr-lg rounded-br-lg outline-none text-slate-100 cursor-pointer transition duration-500">
+        <button id="search-btn" class="flex justify-center items-center py-1 px-2 border-l-0 rounded-tr-lg rounded-br-lg outline-none text-slate-100 cursor-pointer transition duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 cursor-pointer">
             <path class="cursor-pointer" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </button>
       </section>
+
+      <span>&mdash; or &mdash;</span>
+
+      <button id="map-btn" class="flex justify-center items-center py-1 px-2 border-none rounded-lg outline-none text-slate-100 transition duration-300 cursor-pointer">
+        Open Map
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ml-2 cursor-pointer">
+          <path class="cursor-pointer" stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+        </svg>
+      </button>
     </header>
 
-    <main>
-      <section id="result" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col justify-center gap-2 p-2 pl-8 w-2/5 h-60 text-xl border-none rounded-lg border-slate-100 bg-opacity-70 transition duration-500 overflow-hidden">
-        <img id="result-icon" class="absolute top-2 right-2 w-40 h-40 opacity-0 transition-opacity duration-1000 ease-in-out"></img>
-        <h2 id="result-city-name"></h2>
-        <div id="result-temperature"></div>
-        <div id="result-humidity"></div>
-        <div id="result-wind-speed"></div>
-        <div id="result-sunrise"></div>
-        <div id="result-sunset"></div>
-      </section>
+    <!-- Box to show results -->
+    <main id="result" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col justify-center gap-2 p-6 pr-0 w-1/3 h-60 text-xl border-none rounded-lg border-slate-100 bg-opacity-70 transition duration-300">
+      <img id="result-icon" class="absolute top-1/2 -right-1/3 -translate-y-1/2 -translate-x-2/3 w-40 h-40 border-none rounded-lg opacity-0 transition-opacity duration-1000 ease-in-out shadow-2xl"></img>
+      <h2 id="result-city-name"></h2>
+      <div id="result-temperature"></div>
+      <div id="result-humidity"></div>
+      <div id="result-wind-speed"></div>
+      <div id="result-sunrise"></div>
+      <div id="result-sunset"></div>
     </main>
 
-    <section id="google-map" class="hidden my-0 mx-auto p-2 w-1/2 h-1/2 cursor-default"></section>
+    <!-- Modal to show map -->
+    <div id="modal-backdrop" class="hidden fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 backdrop-blur-sm">
+				<div id="modal-box" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex justify-center items-center p-1 w-1/2 h-1/2 rounded-xl opacity-100 bg-slate-100 overflow-hidden">
+					<button id="modal-btn" class="absolute top-0 right-2 w-4 h-4 border-none text-red-500 bg-transparent cursor-pointer transition-transform duration-200 hover:scale-110">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 cursor-pointer">
+              <path class="cursor-pointer" stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+					</button>
+					<section class="flex flex-col justify-center items-center w-full h-full">
+						<h3 class="text-lg">Choose a location on the map</h3>
+						<div id="google-map" class="my-0 mx-auto p-2 w-full h-full rounded-br-lg rounded-bl-lg"></div>
+					</section>
+				</div>
+		</div>
 
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="index.js"></script>
