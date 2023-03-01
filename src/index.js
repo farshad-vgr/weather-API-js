@@ -19,6 +19,7 @@ const API_KEY = "51a76e1c056bf58efd0266169939564e";
 // Store the base class of each element and then add theme classes to the end of the base class
 const themeBaseClass = theme.className;
 const headerBaseClass = header.className;
+const searchInputBaseClass = searchInput.className;
 const searchBtnBaseClass = searchBtn.className;
 const mapBtnBaseClass = mapBtn.className;
 const resultBaseClass = result.className;
@@ -48,33 +49,45 @@ searchInput.addEventListener("keydown", (e) => {
 
 // Send and fetch the weather date when the search button clicked
 searchBtn.addEventListener("click", () => {
-	const xhr = new XMLHttpRequest();
+	if (searchInput.value.trim() !== "") {
+		searchInput.className = searchInputBaseClass;
 
-	xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value.trim()}&appid=${API_KEY}&units=metric`);
+		const xhr = new XMLHttpRequest();
 
-	xhr.onload = function () {
-		resultIcon.style.opacity = "1";
+		xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value.trim()}&appid=${API_KEY}&units=metric`);
 
-		const responseData = JSON.parse(xhr.responseText);
+		xhr.onload = function () {
+			resultIcon.style.opacity = "1";
 
-		resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
+			const responseData = JSON.parse(xhr.responseText);
 
-		resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
+			if (responseData.cod === 200) {
+				searchInput.className = searchInputBaseClass;
 
-		resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
+				resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
 
-		resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
+				resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
 
-		resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
+				resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
-		resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
+				resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
 
-		resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
+				resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
 
-		searchInput.value = "";
-	};
+				resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
 
-	xhr.send();
+				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
+
+				searchInput.value = "";
+			} else {
+				searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.5rem_0.25rem_red]";
+			}
+		};
+
+		xhr.send();
+	} else {
+		searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.5rem_0.25rem_red]";
+	}
 });
 
 mapBtn.addEventListener("click", () => {
