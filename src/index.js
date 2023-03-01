@@ -13,6 +13,9 @@ const resultHumidity = document.getElementById("result-humidity");
 const resultWindSpeed = document.getElementById("result-wind-speed");
 const resultSunrise = document.getElementById("result-sunrise");
 const resultSunset = document.getElementById("result-sunset");
+const toastBox = document.getElementById("toast-box");
+const toastMessage = document.getElementById("toast-message");
+const toastBtn = document.getElementById("toast-btn");
 
 const API_KEY = "51a76e1c056bf58efd0266169939564e";
 
@@ -80,13 +83,25 @@ searchBtn.addEventListener("click", () => {
 
 				searchInput.value = "";
 			} else {
-				searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.5rem_0.25rem_red]";
+				toastMessage.textContent = "The City Name Not Found !";
+				toastBox.classList.replace("bottom-full", "bottom-1/2"); // Shows toast
+				searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.25rem_0.25rem_red]";
+				setTimeout(() => {
+					toastBox.classList.replace("bottom-1/2", "bottom-full"); // Hide toast
+					searchInput.className = searchInputBaseClass;
+				}, 3000);
 			}
 		};
 
 		xhr.send();
 	} else {
-		searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.5rem_0.25rem_red]";
+		toastMessage.textContent = "Enter The City Name !";
+		toastBox.classList.replace("bottom-full", "bottom-1/2"); // Shows toast
+		searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.25rem_0.25rem_red]";
+		setTimeout(() => {
+			toastBox.classList.replace("bottom-1/2", "bottom-full"); // Hide toast
+			searchInput.className = searchInputBaseClass;
+		}, 3000);
 	}
 });
 
@@ -102,6 +117,11 @@ modalBackdrop.addEventListener("click", (e) => {
 
 modalBtn.addEventListener("click", () => {
 	modalBackdrop.classList.replace("bottom-0", "bottom-full"); // Hide modal
+});
+
+toastBtn.addEventListener("click", () => {
+	toastBox.classList.replace("bottom-1/2", "bottom-full"); // Hide toast
+	searchInput.className = searchInputBaseClass;
 });
 
 // Loading Google map at startup and fetching weather by clicking on the map
@@ -195,7 +215,7 @@ function themeChanger(num) {
 		searchBtn.className = searchBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		mapBtn.className = mapBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		result.className = resultBaseClass + " bg-blue-400";
-		resultIcon.className = resultIconBeseClass + " bg-blue-600";
+		resultIcon.className = resultIconBeseClass + " bg-blue-600" + " shadow-[inset_0_0_1rem_0.5rem_blue]";
 	} else if (num >= 3 && num < 6) {
 		document.body.style.backgroundImage = "url(./assets/images/background/spring.jpg)";
 		theme.className = themeBaseClass + " bg-pink-600" + " hover:bg-pink-700";
@@ -203,7 +223,7 @@ function themeChanger(num) {
 		searchBtn.className = searchBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		mapBtn.className = mapBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		result.className = resultBaseClass + " bg-pink-400";
-		resultIcon.className = resultIconBeseClass + " bg-pink-600";
+		resultIcon.className = resultIconBeseClass + " bg-pink-600" + " shadow-[inset_0_0_1rem_0.5rem_purple]";
 	} else if (num >= 6 && num < 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/summer.jpg)";
 		theme.className = themeBaseClass + " bg-green-600" + " hover:bg-green-700";
@@ -211,7 +231,7 @@ function themeChanger(num) {
 		searchBtn.className = searchBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
 		mapBtn.className = mapBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
 		result.className = resultBaseClass + " bg-green-400";
-		resultIcon.className = resultIconBeseClass + " bg-green-600";
+		resultIcon.className = resultIconBeseClass + " bg-green-600" + " shadow-[inset_0_0_1rem_0.5rem_green]";
 	} else if (num >= 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/autumn.jpg)";
 		theme.className = themeBaseClass + " bg-orange-600" + " hover:bg-orange-700";
@@ -219,7 +239,7 @@ function themeChanger(num) {
 		searchBtn.className = searchBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		mapBtn.className = mapBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		result.className = resultBaseClass + " bg-orange-400";
-		resultIcon.className = resultIconBeseClass + " bg-orange-600";
+		resultIcon.className = resultIconBeseClass + " bg-orange-500" + " shadow-[inset_0_0_1rem_0.5rem_orangered]";
 	}
 }
 
