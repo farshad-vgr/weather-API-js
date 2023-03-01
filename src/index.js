@@ -16,6 +16,7 @@ const resultSunset = document.getElementById("result-sunset");
 
 const API_KEY = "51a76e1c056bf58efd0266169939564e";
 
+// Store the base class of each element and then add theme classes to the end of the base class
 const themeBaseClass = theme.className;
 const headerBaseClass = header.className;
 const searchBtnBaseClass = searchBtn.className;
@@ -176,7 +177,7 @@ window.onload = function () {
 function themeChanger(num) {
 	if (num < 3) {
 		document.body.style.backgroundImage = "url(./assets/images/background/winter.jpg)";
-		theme.className = themeBaseClass + " bg-blue-600";
+		theme.className = themeBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		header.className = headerBaseClass + " bg-blue-400";
 		searchBtn.className = searchBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
 		mapBtn.className = mapBtnBaseClass + " bg-blue-600" + " hover:bg-blue-700";
@@ -184,7 +185,7 @@ function themeChanger(num) {
 		resultIcon.className = resultIconBeseClass + " bg-blue-600";
 	} else if (num >= 3 && num < 6) {
 		document.body.style.backgroundImage = "url(./assets/images/background/spring.jpg)";
-		theme.className = themeBaseClass + " bg-pink-600";
+		theme.className = themeBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		header.className = headerBaseClass + " bg-pink-400";
 		searchBtn.className = searchBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
 		mapBtn.className = mapBtnBaseClass + " bg-pink-600" + " hover:bg-pink-700";
@@ -192,7 +193,7 @@ function themeChanger(num) {
 		resultIcon.className = resultIconBeseClass + " bg-pink-600";
 	} else if (num >= 6 && num < 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/summer.jpg)";
-		theme.className = themeBaseClass + " bg-green-600";
+		theme.className = themeBaseClass + " bg-green-600" + " hover:bg-green-700";
 		header.className = headerBaseClass + " bg-green-400";
 		searchBtn.className = searchBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
 		mapBtn.className = mapBtnBaseClass + " bg-green-600" + " hover:bg-green-700";
@@ -200,7 +201,7 @@ function themeChanger(num) {
 		resultIcon.className = resultIconBeseClass + " bg-green-600";
 	} else if (num >= 9) {
 		document.body.style.backgroundImage = "url(./assets/images/background/autumn.jpg)";
-		theme.className = themeBaseClass + " bg-orange-600";
+		theme.className = themeBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		header.className = headerBaseClass + " bg-orange-400";
 		searchBtn.className = searchBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
 		mapBtn.className = mapBtnBaseClass + " bg-orange-600" + " hover:bg-orange-700";
