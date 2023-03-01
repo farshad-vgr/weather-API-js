@@ -49,9 +49,10 @@
     </header>
 
     <!-- Box to show results -->
-    <main id="result" class="absolute bottom-2 left-1/2 -translate-x-1/2 hidden flex-col justify-center gap-2 p-6 pr-0 w-1/3 h-60 text-xl border-none rounded-lg border-slate-100 bg-opacity-70 transition duration-300">
+    <main id="result" class="absolute bottom-2 left-1/2 -translate-x-1/2 hidden flex-col justify-center gap-2 p-6 pr-0 w-1/3 h-72 text-xl border-none rounded-lg border-slate-100 bg-opacity-70 transition duration-300">
       <img id="result-icon" class="absolute top-1/2 -right-1/3 -translate-y-1/2 -translate-x-2/3 w-40 h-40 border-none rounded-lg opacity-0 transition-all duration-300 ease-in-out"></img>
       <h2 id="result-city-name"></h2>
+      <div id="result-time"></div>
       <div id="result-temperature"></div>
       <div id="result-humidity"></div>
       <div id="result-wind-speed"></div>
@@ -60,14 +61,15 @@
     </main>
 
     <!-- Skeleton Box to show Loading -->
-    <main id="skeleton" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col justify-center gap-4 p-6 pr-48 w-1/3 h-60 text-xl border-none rounded-lg border-slate-100 bg-gray-400 bg-opacity-70 transition duration-300">
-      <div id="skeleton-icon" class="absolute top-1/2 -right-1/4 -translate-y-1/2 -translate-x-1/3 w-40 h-40 border-none rounded-lg bg-slate-300 animate-pulse"></div>
-      <h2 id="skeleton-city-name" class="block w-80 h-7 border-none rounded-lg bg-slate-100 animate-pulse"></h2>
-      <div id="skeleton-temperature" class="block w-48 h-7 border-none rounded-lg bg-slate-100 animate-pulse-delay1"></div>
-      <div id="skeleton-humidity" class="block w-40 h-7 border-none rounded-lg bg-slate-100 animate-pulse-delay2"></div>
-      <div id="skeleton-wind-speed" class="block w-64 h-7 border-none rounded-lg bg-slate-100 animate-pulse-delay3"></div>
-      <div id="skeleton-sunrise" class="block w-80 h-7 border-none rounded-lg bg-slate-100 animate-pulse-delay4"></div>
-      <div id="skeleton-sunset" class="block w-72 h-7 border-none rounded-lg bg-slate-100 animate-pulse-delay5"></div>
+    <main id="skeleton" class="absolute bottom-2 left-1/2 -translate-x-1/2 hidden flex-col justify-center gap-2 p-6 pr-0 w-1/3 h-72 text-xl border-none rounded-lg border-slate-100 bg-gray-400 bg-opacity-70 transition duration-300">
+      <div id="skeleton-icon" class="absolute top-1/2 -right-1/3 -translate-y-1/2 -translate-x-2/3 w-40 h-40 border-none rounded-lg bg-slate-300 animate-pulse"></div>
+      <h2 id="skeleton-city-name" class="w-96 h-8 border-none rounded-lg bg-slate-100 animate-pulse"></h2>
+      <div id="skeleton-time" class="w-80 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay1"></div>
+      <div id="skeleton-temperature" class="w-48 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay2"></div>
+      <div id="skeleton-humidity" class="w-40 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay3"></div>
+      <div id="skeleton-wind-speed" class="w-64 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay4"></div>
+      <div id="skeleton-sunrise" class="w-80 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay5"></div>
+      <div id="skeleton-sunset" class="w-72 h-8 border-none rounded-lg bg-slate-100 animate-pulse-delay6"></div>
     </main>
 
     <!-- Modal to show map -->

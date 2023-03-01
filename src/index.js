@@ -8,6 +8,7 @@ const modalBtn = document.getElementById("modal-btn");
 const result = document.getElementById("result");
 const resultIcon = document.getElementById("result-icon");
 const resultCityName = document.getElementById("result-city-name");
+const resultTime = document.getElementById("result-time");
 const resultTemperature = document.getElementById("result-temperature");
 const resultHumidity = document.getElementById("result-humidity");
 const resultWindSpeed = document.getElementById("result-wind-speed");
@@ -73,17 +74,19 @@ searchBtn.addEventListener("click", () => {
 
 				resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
 
-				resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
+				resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}&mdash;${responseData.sys.country}<small class="ml-2">(${responseData.weather[0].description})</small>`;
 
+				resultTime.innerHTML = `<span style="font-weight: bold">Local Time:</span> ${new Date(responseData.dt * 1000).toLocaleString()}`;
+				
 				resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
 				resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
 
-				resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
+				resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind Speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
 
-				resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise at:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
+				resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
 
-				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
+				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
 
 				searchInput.value = "";
 
@@ -164,8 +167,10 @@ window.onload = function () {
 
 			resultIcon.setAttribute("src", `http://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`);
 
-			resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}<small class="ml-2">(Description: ${responseData.weather[0].description})</small>`;
+			resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}&mdash;${responseData.sys.country}<small class="ml-2">(${responseData.weather[0].description})</small>`;
 
+			resultTime.innerHTML = `<span style="font-weight: bold">Local Time:</span> ${new Date(responseData.dt * 1000).toLocaleString()}`;
+			
 			resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
 			resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
@@ -249,7 +254,3 @@ function themeChanger(num) {
 		resultIcon.className = resultIconBeseClass + " bg-orange-500" + " shadow-[inset_0_0_1rem_0.5rem_orangered]";
 	}
 }
-
-// Choose a default city name and start the search
-searchInput.value = "Tehran";
-searchBtn.click();
