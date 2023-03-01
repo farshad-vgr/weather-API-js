@@ -16,6 +16,7 @@ const resultSunset = document.getElementById("result-sunset");
 const toastBox = document.getElementById("toast-box");
 const toastMessage = document.getElementById("toast-message");
 const toastBtn = document.getElementById("toast-btn");
+const skeleton = document.getElementById("skeleton");
 
 const API_KEY = "51a76e1c056bf58efd0266169939564e";
 
@@ -53,6 +54,9 @@ searchInput.addEventListener("keydown", (e) => {
 // Send and fetch the weather date when the search button clicked
 searchBtn.addEventListener("click", () => {
 	if (searchInput.value.trim() !== "") {
+		result.classList.replace("flex", "hidden");
+		skeleton.classList.replace("hidden", "flex");
+
 		searchInput.className = searchInputBaseClass;
 
 		const xhr = new XMLHttpRequest();
@@ -82,6 +86,9 @@ searchBtn.addEventListener("click", () => {
 				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
 
 				searchInput.value = "";
+
+				result.classList.replace("hidden", "flex");
+				skeleton.classList.replace("flex", "hidden");
 			} else {
 				toastMessage.textContent = "The City Name Not Found !";
 				toastBox.classList.replace("bottom-full", "bottom-1/2"); // Shows toast
