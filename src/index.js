@@ -77,7 +77,7 @@ searchBtn.addEventListener("click", () => {
 				resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}&mdash;${responseData.sys.country}<small class="ml-2">(${responseData.weather[0].description})</small>`;
 
 				resultTime.innerHTML = `<span style="font-weight: bold">Local Time:</span> ${new Date(responseData.dt * 1000).toLocaleString()}`;
-				
+
 				resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
 				resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
@@ -93,6 +93,8 @@ searchBtn.addEventListener("click", () => {
 				result.classList.replace("hidden", "flex");
 				skeleton.classList.replace("flex", "hidden");
 			} else {
+				result.classList.replace("flex", "hidden");
+				skeleton.classList.replace("flex", "hidden");
 				toastMessage.textContent = "The City Name Not Found !";
 				toastBox.classList.replace("bottom-full", "bottom-1/2"); // Shows toast
 				searchInput.className = searchInputBaseClass + " shadow-[inset_0_0_0.25rem_0.25rem_red]";
@@ -170,7 +172,7 @@ window.onload = function () {
 			resultCityName.innerHTML = `<span style="font-weight: bold">City:</span> ${responseData.name}&mdash;${responseData.sys.country}<small class="ml-2">(${responseData.weather[0].description})</small>`;
 
 			resultTime.innerHTML = `<span style="font-weight: bold">Local Time:</span> ${new Date(responseData.dt * 1000).toLocaleString()}`;
-			
+
 			resultTemperature.innerHTML = `<span style="font-weight: bold">Temperature:</span> ${Math.round(responseData.main.temp)} &#8451`;
 
 			resultHumidity.innerHTML = `<span style="font-weight: bold">Humidity:</span> ${Math.round(responseData.main.humidity)} %`;
