@@ -20,6 +20,6 @@ body {
   height: 100vh;
   letter-spacing: 0.125rem;
   font-family: "Acme", sans-serif;
-  overflow: hidden;
   transition: background 0.5s;
+  overflow: hidden;
 }

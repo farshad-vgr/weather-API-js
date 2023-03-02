@@ -158,6 +158,11 @@ window.onload = function () {
 	let marker, circle;
 
 	google.maps.event.addListener(map, "click", function (e) {
+		result.classList.replace("flex", "hidden");
+		skeleton.classList.replace("hidden", "flex");
+
+		searchInput.className = searchInputBaseClass;
+
 		const xhr = new XMLHttpRequest();
 
 		xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?lat=${e.latLng.lat()}&lon=${e.latLng.lng()}&appid=${API_KEY}&units=metric`);
@@ -184,6 +189,9 @@ window.onload = function () {
 			resultSunset.innerHTML = `<span style="font-weight: bold">Sunset at:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
 
 			searchInput.value = "";
+
+			result.classList.replace("hidden", "flex");
+			skeleton.classList.replace("flex", "hidden");
 		};
 
 		xhr.send();
