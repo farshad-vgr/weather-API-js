@@ -23,7 +23,7 @@
   </a>
 
   <a href="https://openweathermap.org/api" target="_blank" title="OpenWeatherMap API">
-    <img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png" alt="OpenWeatherMap API" width="60" height="40"/>
+    <img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png" alt="OpenWeatherMap API" width="100" height="40"/>
   </a>
 </p>
 
