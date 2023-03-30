@@ -84,9 +84,15 @@ searchBtn.addEventListener("click", () => {
 
 				resultWindSpeed.innerHTML = `<span style="font-weight: bold">Wind Speed:</span> ${Math.round(responseData.wind.speed)} meter/second`;
 
-				resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise:</span> ${new Date(responseData.sys.sunrise * 1000).toLocaleString()}`;
+				resultSunrise.innerHTML = `<span style="font-weight: bold">Sunrise:</span> ${new Intl.DateTimeFormat("en-IN", {
+					dateStyle: "short",
+					timeStyle: "short",
+				}).format(new Date(responseData.sys.sunrise * 1000))}`;
 
-				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset:</span> ${new Date(responseData.sys.sunset * 1000).toLocaleString()}`;
+				resultSunset.innerHTML = `<span style="font-weight: bold">Sunset:</span> ${new Intl.DateTimeFormat("en-IN", {
+					dateStyle: "short",
+					timeStyle: "short",
+				}).format(new Date(responseData.sys.sunset * 1000))}`;
 
 				searchInput.value = "";
 
